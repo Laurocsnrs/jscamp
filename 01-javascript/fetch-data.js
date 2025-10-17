@@ -2,7 +2,7 @@ const container = document.querySelector('.jobs-listings')
 const pagination = document.querySelector('.pagination')
 const lastAnchor = pagination.querySelector('a:last-child') // el último <a> del nav
 
-const RESULTS_PER_PAGE = 5
+const RESULTS_PER_PAGE = 6
 
 fetch("./data.json") /* fetch es asíncrono */
     .then((response) => {
@@ -32,8 +32,7 @@ fetch("./data.json") /* fetch es asíncrono */
         for (let i = 0; i <= pages; i++) {
             const anchor = document.createElement('a')
             anchor.innerText = i + 1
+            anchor.href = "#"
             pagination.insertBefore(anchor, lastAnchor)
         }
-
-
     });
