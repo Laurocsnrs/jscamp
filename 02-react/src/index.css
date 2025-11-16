@@ -370,8 +370,14 @@ article {
     }
 
     .search-bar {
+        position: relative;
         background: var(--input-bg);
         padding: 0.25rem 0.5rem;
+
+        .btnSearch {
+            position: absolute;
+            right: 4px;
+        }
     }
 
     .search-filters {
@@ -395,76 +401,4 @@ article {
 .jobs-listings {
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 1rem;
-
-    .job-listing-card {
-        background: none;
-        box-shadow: none;
-        border-radius: 0;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-        margin: 0;
-
-        display: flex; /* valor original */
-        align-items: start;
-        gap: 1rem;
-
-        &.is-hidden {
-            display: none;
-        }
-
-        small {
-            font-size: 0.875rem;
-            opacity: 0.75;
-        }
-
-        p {
-            margin-top: 0.5rem;
-        }
-
-        &:last-child {
-            border-bottom: none;
-        }
-    }
-}
-
-.pagination {
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-    margin-block: 2rem;
-
-    a {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 2.5rem;
-        height: 2.5rem;
-        text-decoration: none;
-        color: var(--text-muted);
-        border-radius: 0.375rem;
-        transition: all 0.3s;
-
-        &:hover,
-        &:focus {
-            background-color: #fff;
-        }
-
-        &:active {
-            transform: scale(0.9);
-        }
-
-        &.is-active {
-            background-color: var(--primary-light);
-            color: white;
-            pointer-events: none;
-        }
-    }
-}
-
-.button-apply-job {
-    background: #09f;
-
-    &.is-applied {
-        background: #4caf50;
-        pointer-events: none;
-    }
 }
