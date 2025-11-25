@@ -1,33 +1,18 @@
 import { useId } from "react";
+import { useSearchForm } from "../hooks/useSearchForm";
 
-export function SearchFormSection({ onSearch, onTextFilter }) {
+export function SearchFormSection({ onTextFilter, onSearch, onClearFilter, hasActiveFilters, filters }) {
 
     const idText = useId()
     const idTechnology = useId()
     const idLocation = useId()
     const idExperienceLevel = useId()
 
-    const handleSubmit = (event) => {
-
-        event.preventDefault()
-
-        const formData = new FormData(event.target)
-
-        const filters = {
-            search: formData.get(idText),
-            technology: formData.get(idTechnology),
-            location: formData.get(idLocation),
-            experienceLevel: formData.get(idExperienceLevel)
-        }
-
-        onSearch(filters)
-
-    }
-
-    const handleTextChange = (event) => {
-        const text = event.target.value
-        onTextFilter(text)
-    }
+    const {
+        searchText,
+        handleSubmit,
+        handleTextChange
+    } = useSearchForm({ idTechnology, idLocation, idExperienceLevel, idText, onSearch, onTextFilter })
 
     return (
         <section className="jobs-search">
@@ -35,7 +20,7 @@ export function SearchFormSection({ onSearch, onTextFilter }) {
             <p>Explora miles de oportunidades en el sector tecnológico.</p>
 
             <form
-                onSubmit={handleSubmit}
+                onChange={handleSubmit}
                 id="empleos-search-form"
                 role="search"
             >
@@ -64,16 +49,15 @@ export function SearchFormSection({ onSearch, onTextFilter }) {
                         placeholder="Buscar trabajos, empresas o habilidades"
                         onChange={handleTextChange}
                     />
-                    <button
-                        type="submit"
-                        className="btnSearch"
-                    >
-                        Buscar
-                    </button>
                 </div>
 
                 <div className="search-filters">
-                    <select name={idTechnology} id={idTechnology}>
+                    <select
+                        name={idTechnology}
+                        id={idTechnology}
+                        value={filters.technology}
+                        onChange={handleSubmit}
+                    >
                         <option value="">Tecnología</option>
                         <optgroup label="Tecnologías populares">
                             <option value="javascript">JavaScript</option>
@@ -94,6 +78,8 @@ export function SearchFormSection({ onSearch, onTextFilter }) {
                     <select
                         name={idLocation}
                         id={idLocation}
+                        value={filters.location}
+                        onChange={handleSubmit}
                     >
                         <option value="">Ubicación</option>
                         <option value="remoto">Remoto</option>
@@ -106,6 +92,8 @@ export function SearchFormSection({ onSearch, onTextFilter }) {
                     <select
                         name={idExperienceLevel}
                         id={idExperienceLevel}
+                        value={filters.experienceLevel}
+                        onChange={handleSubmit}
                     >
                         <option value="">Nivel de experiencia</option>
                         <option value="junior">Junior</option>
@@ -113,10 +101,14 @@ export function SearchFormSection({ onSearch, onTextFilter }) {
                         <option value="senior">Senior</option>
                         <option value="lead">Lead</option>
                     </select>
+
+                    {
+                        hasActiveFilters && <button onClick={onClearFilter}>Limpiar filtros</button>
+                    }
                 </div>
             </form>
 
             <span id="filter-selected-value"></span>
-        </section>
+        </section >
     );
 }

@@ -141,7 +141,7 @@ header div a {
 
 /* Hero */
 main > section:nth-child(1) {
-    height: 500px;
+    height: 800px;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -194,7 +194,9 @@ form span {
     flex-shrink: 0;
 }
 
-form input[type="text"] {
+form input[type="text"],
+form input[type="email"],
+form input[type="textarea"] {
     flex: 1;
     background: transparent;
     border: none;
@@ -205,7 +207,9 @@ form input[type="text"] {
     font-family: inherit;
 }
 
-form input[type="text"]::placeholder {
+form input[type="text"]::placeholder,
+form input[type="email"]::placeholder,
+form input[type="textarea"]::placeholder {
     color: #64748b;
 }
 
@@ -287,32 +291,6 @@ main > section:nth-child(2) footer {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 16px;
 }
-
-/* Feature Cards */
-/* article {
-  background-color: var(--card-bg);
-  padding: 2rem;
-  margin-bottom: 16px;
-  border-radius: 0.5rem;                   
-  box-shadow: 0px 1px 3px 0 var(--shadow); 
-
-  svg {
-    color: var(--primary-light);          
-    background: rgba(0, 153, 255, 0.3);  
-    border-radius: 9999px;               
-    width: 64px;                         
-    height: 64px;                        
-    padding: 16px;                       
-  }
-
-  h3 {
-    font-weight: 500;
-  }
-
-  p {
-    color: var(--text-muted);
-  }
-} */
 
 /* Footer */
 footer {
@@ -401,4 +379,57 @@ article {
 .jobs-listings {
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 1rem;
+}
+
+.loaderWrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.loader {
+    width: 48px;
+    height: 48px;
+    border: 5px solid #fff;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.contact {
+    h1 {
+        margin-bottom: 2rem;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .errors {
+        background-color: rgb(144, 0, 0);
+        text-align: center;
+    }
 }
